@@ -1,0 +1,742 @@
+/* ==========================================================================
+   Cinematic layer: hero, heritage scenes, signature food, kitchen, place.
+   Everything is visible by default; GSAP only animates it when the visitor
+   has not asked for reduced motion.
+   ========================================================================== */
+
+/* ---------- Word-by-word headline reveal ---------- */
+.split__word {
+  display: inline-block;
+  overflow: hidden;
+  vertical-align: top;
+  padding-bottom: 0.16em;
+  margin-bottom: -0.16em;
+}
+.split__inner {
+  display: inline-block;
+  will-change: transform;
+}
+
+.btn--outline-dark {
+  border-color: var(--green);
+  color: var(--green);
+}
+.btn--outline-dark:hover {
+  background: var(--green);
+  color: var(--ivory);
+}
+
+.media-tag {
+  position: absolute;
+  right: 12px;
+  bottom: 12px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: 0.72rem;
+  letter-spacing: 0.04em;
+  color: var(--ivory);
+  background: rgba(7, 26, 20, 0.72);
+  border: 1px solid rgba(228, 185, 85, 0.5);
+}
+
+/* ---------- Vector art shared styles ---------- */
+.art {
+  position: absolute;
+  display: block;
+  height: auto;
+  pointer-events: none;
+}
+.art__flag {
+  fill: var(--saffron);
+  transform-box: fill-box;
+  transform-origin: 0 50%;
+  animation: flag-wave 3.4s ease-in-out infinite alternate;
+}
+@keyframes flag-wave {
+  from {
+    transform: skewY(-5deg) scaleX(1);
+  }
+  to {
+    transform: skewY(5deg) scaleX(0.9);
+  }
+}
+
+/* ==========================================================================
+   HERO
+   ========================================================================== */
+.hero {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  min-height: max(620px, calc(100svh - 114px));
+  color: var(--ivory);
+  background: var(--green-deep);
+}
+.hero__sky {
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  background:
+    radial-gradient(48% 52% at 74% 84%, rgba(185, 78, 43, 0.62), transparent 72%),
+    radial-gradient(34% 36% at 74% 78%, rgba(228, 185, 85, 0.38), transparent 72%),
+    radial-gradient(30% 40% at 10% 100%, rgba(228, 185, 85, 0.12), transparent 70%),
+    linear-gradient(180deg, #071a14 0%, #102f24 58%, #15392c 100%);
+}
+.hero__scene {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+}
+.hero__sun {
+  position: absolute;
+  right: 8%;
+  bottom: 4%;
+  width: clamp(280px, 40vw, 640px);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    rgba(242, 201, 100, 0.5) 0%,
+    rgba(213, 166, 66, 0.26) 30%,
+    rgba(185, 78, 43, 0.14) 55%,
+    transparent 70%
+  );
+}
+.hero__fort {
+  right: -1%;
+  bottom: -3px;
+  width: clamp(340px, 50vw, 800px);
+  color: var(--green-deep);
+}
+.hero__gopuram {
+  left: 1%;
+  bottom: -3px;
+  width: clamp(150px, 17vw, 270px);
+  color: var(--green-deep);
+}
+.hero__palm {
+  left: clamp(120px, 16vw, 250px);
+  bottom: -3px;
+  width: clamp(80px, 9.5vw, 150px);
+  color: var(--green-deep);
+}
+.hero__leaf {
+  left: -2%;
+  bottom: -3px;
+  width: clamp(120px, 15vw, 230px);
+  color: rgba(26, 82, 54, 0.85);
+}
+
+.hero__inner {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 0.92fr) minmax(0, 1.08fr);
+  align-items: center;
+  gap: clamp(24px, 5vw, 72px);
+  padding-block: clamp(40px, 6vw, 80px) clamp(72px, 9vw, 120px);
+}
+.hero__title {
+  font-size: clamp(2.5rem, 5.2vw, 4.5rem);
+  font-weight: 700;
+  line-height: 1.08;
+  color: var(--white);
+  letter-spacing: -0.01em;
+}
+.hero__lead {
+  margin-top: 22px;
+  max-width: 44ch;
+  font-size: clamp(1rem, 1.6vw, 1.14rem);
+  color: rgba(247, 240, 227, 0.9);
+}
+.hero__meta {
+  margin-top: 24px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 14px;
+  font-size: 0.95rem;
+  color: rgba(247, 240, 227, 0.9);
+}
+.hero__rating {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--gold-light);
+}
+.hero__divider {
+  opacity: 0.45;
+}
+.hero__actions {
+  margin-top: 30px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+}
+
+@media (max-width: 860px) {
+  .hero {
+    display: block;
+    min-height: 0;
+  }
+  .hero__inner {
+    grid-template-columns: 1fr;
+    padding-block: 36px 96px;
+  }
+  .hero__sun {
+    right: -22%;
+    bottom: 0;
+    width: 96vw;
+  }
+  .hero__fort {
+    right: -4%;
+    width: min(80vw, 440px);
+  }
+  .hero__gopuram {
+    width: 112px;
+  }
+  .hero__palm {
+    left: 84px;
+    width: 64px;
+  }
+  .hero__leaf {
+    width: 110px;
+  }
+}
+
+/* ==========================================================================
+   A. TWO CULTURES, ONE TABLE
+   ========================================================================== */
+.cultures {
+  position: relative;
+  overflow: hidden;
+  padding-block: clamp(64px, 9vw, 120px);
+  color: var(--ivory);
+  background:
+    radial-gradient(60% 40% at 50% 0%, rgba(228, 185, 85, 0.08), transparent 70%),
+    var(--green-deep);
+}
+.cultures__head {
+  max-width: 760px;
+  margin: 0 auto clamp(36px, 6vw, 64px);
+  text-align: center;
+}
+.cultures__head .eyebrow {
+  justify-content: center;
+}
+.cultures__head .eyebrow::after {
+  content: '';
+  width: 32px;
+  height: 2px;
+  background: currentColor;
+  opacity: 0.8;
+}
+.cultures__lead {
+  margin-inline: auto;
+  color: rgba(247, 240, 227, 0.82);
+}
+
+.cultures__grid {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+.cultures__panel {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  min-height: clamp(460px, 52vw, 620px);
+  padding: clamp(24px, 3.4vw, 46px);
+}
+.cultures__panel--south {
+  border-radius: 18px 0 0 18px;
+  background: linear-gradient(180deg, #1e5239 0%, #14402e 52%, #0d2b1f 100%);
+}
+.cultures__panel--maha {
+  border-radius: 0 18px 18px 0;
+  background: linear-gradient(180deg, #4a1d12 0%, #9b3f22 52%, #dc8a3d 100%);
+}
+/* solid ground strip so moving silhouettes never reveal a gap */
+.cultures__panel::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 7%;
+  z-index: -1;
+}
+.cultures__panel--south::after {
+  background: #06150f;
+}
+.cultures__panel--maha::after {
+  background: #170c07;
+}
+.cultures__text {
+  position: relative;
+  z-index: 2;
+  max-width: 34ch;
+}
+.cultures__text h3 {
+  font-size: clamp(1.6rem, 3vw, 2.3rem);
+  color: var(--white);
+  margin-bottom: 12px;
+}
+.cultures__text p:not(.eyebrow) {
+  color: rgba(247, 240, 227, 0.9);
+}
+.cultures__art {
+  position: absolute;
+  inset: auto 0 0 0;
+  height: 64%;
+  z-index: -1;
+  pointer-events: none;
+}
+.cultures__glow {
+  position: absolute;
+  left: 20%;
+  bottom: 6%;
+  width: 60%;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(228, 185, 85, 0.3), transparent 68%);
+}
+.cultures__glow--sun {
+  left: 24%;
+  bottom: 14%;
+  width: 52%;
+  background: radial-gradient(circle, rgba(255, 214, 120, 0.85), rgba(255, 170, 70, 0.35) 45%, transparent 70%);
+}
+.cultures__gopuram {
+  left: 26%;
+  bottom: -2px;
+  width: 44%;
+  color: #06150f;
+}
+.cultures__palm {
+  left: 4%;
+  bottom: -2px;
+  width: 22%;
+  color: #06150f;
+}
+.cultures__palm--b {
+  left: auto;
+  right: 8%;
+  width: 17%;
+}
+.cultures__leaf {
+  right: -4%;
+  bottom: -2px;
+  width: 34%;
+  color: rgba(54, 128, 78, 0.6);
+}
+.cultures__fort {
+  left: 6%;
+  bottom: -2px;
+  width: 90%;
+  color: #170c07;
+}
+.cultures__seam {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  z-index: 3;
+  display: grid;
+  place-items: center;
+  width: 64px;
+  height: 64px;
+  margin: -32px 0 0 -32px;
+  border: 4px solid var(--green-deep);
+  border-radius: 50%;
+  font-family: var(--font-head);
+  font-size: 2rem;
+  line-height: 1;
+  color: var(--green-deep);
+  background: var(--gold);
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.4);
+}
+.cultures__close {
+  margin-top: clamp(32px, 5vw, 56px);
+  text-align: center;
+}
+.cultures__close p {
+  margin-bottom: 20px;
+  font-family: var(--font-head);
+  font-size: clamp(1.2rem, 2.4vw, 1.6rem);
+  color: var(--ivory);
+}
+
+@media (max-width: 860px) {
+  .cultures__grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+  .cultures__panel {
+    min-height: 440px;
+  }
+  .cultures__panel--south,
+  .cultures__panel--maha {
+    border-radius: 16px;
+  }
+  .cultures__seam {
+    display: none;
+  }
+}
+
+/* ==========================================================================
+   B. SIGNATURE FOOD
+   ========================================================================== */
+.food {
+  background: var(--ivory);
+}
+.food__grid {
+  display: grid;
+  grid-template-columns: 1.15fr 1fr 1fr;
+  grid-auto-rows: auto;
+  gap: 20px;
+}
+.food-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  overflow: hidden;
+  padding: 26px 24px;
+  border: 1px solid rgba(213, 166, 66, 0.4);
+  border-top: 3px solid var(--terracotta);
+  border-radius: 14px;
+  background: var(--white);
+  box-shadow: var(--shadow-sm);
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
+}
+.food-card:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-md);
+}
+.food-card h3 {
+  font-size: 1.35rem;
+  color: var(--green);
+}
+.food-card p {
+  color: #4a4a4a;
+  font-size: 0.95rem;
+}
+.food-card__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 52px;
+  height: 52px;
+  margin-bottom: 8px;
+  border-radius: 50%;
+  color: var(--gold-light);
+  background: var(--green);
+}
+.food-card__tag {
+  margin-top: auto;
+  padding-top: 10px;
+  font-size: 0.72rem !important;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--terracotta) !important;
+}
+.food-card--feature {
+  grid-row: 1 / span 2;
+  padding: 0;
+  color: var(--ivory);
+  background: var(--green-deep);
+  border-color: rgba(213, 166, 66, 0.5);
+}
+.food-card--feature h3 {
+  color: var(--white);
+  font-size: 1.7rem;
+}
+.food-card--feature p {
+  color: rgba(247, 240, 227, 0.85);
+}
+.food-card--feature .food-card__tag {
+  color: var(--gold-light) !important;
+}
+.food-card__media {
+  position: relative;
+  flex: 1;
+  min-height: 280px;
+  overflow: hidden;
+}
+.food-card__media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 62%;
+  transition: transform 0.8s ease;
+}
+.food-card--feature:hover .food-card__media img {
+  transform: scale(1.06);
+}
+.food-card__body {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 22px 24px 26px;
+}
+.food__cta {
+  margin-top: clamp(28px, 4vw, 44px);
+  text-align: center;
+}
+
+@media (max-width: 1000px) {
+  .food__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .food-card--feature {
+    grid-column: 1 / -1;
+    grid-row: auto;
+  }
+  .food-card__media {
+    flex: none;
+    aspect-ratio: 16 / 9;
+    min-height: 0;
+  }
+}
+@media (max-width: 560px) {
+  .food__grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ==========================================================================
+   C. FROM THE KITCHEN
+   ========================================================================== */
+.kitchen {
+  color: var(--ivory);
+  background: linear-gradient(180deg, var(--green) 0%, var(--green-deep) 100%);
+}
+.kitchen__inner {
+  display: grid;
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+  align-items: center;
+  gap: clamp(32px, 6vw, 80px);
+}
+.kitchen__lead {
+  margin-top: 18px;
+  max-width: 44ch;
+  font-size: clamp(1.02rem, 1.7vw, 1.15rem);
+  color: rgba(247, 240, 227, 0.88);
+}
+.kitchen__points {
+  display: grid;
+  gap: 14px;
+  margin-top: 28px;
+}
+.kitchen__points li {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  color: var(--ivory);
+}
+.kitchen__points svg {
+  flex-shrink: 0;
+  color: var(--gold-light);
+}
+.kitchen__figure {
+  margin: 0;
+}
+.kitchen__frame {
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 5 / 4;
+  border-radius: 14px 90px 14px 90px;
+  background: var(--green-deep);
+  box-shadow:
+    0 30px 60px rgba(0, 0, 0, 0.45),
+    0 0 0 1px rgba(228, 185, 85, 0.4);
+}
+.kitchen__frame img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 60%;
+  transform: scale(1.25);
+  transform-origin: 50% 72%;
+}
+
+@media (max-width: 860px) {
+  .kitchen__inner {
+    grid-template-columns: 1fr;
+  }
+  .kitchen__frame {
+    border-radius: 12px 56px 12px 56px;
+  }
+}
+
+/* ==========================================================================
+   D. A PLACE TO COME TOGETHER
+   ========================================================================== */
+.place {
+  background: var(--ivory-dark);
+}
+.place__inner {
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
+  align-items: center;
+  gap: clamp(32px, 6vw, 80px);
+}
+.place__media {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1 / 0.82;
+}
+.place__day {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 80%;
+}
+.place__night {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: 36%;
+}
+.place__photo {
+  overflow: hidden;
+  border-radius: 12px;
+  background: var(--green);
+  box-shadow: var(--shadow-md);
+}
+.place__day .place__photo {
+  aspect-ratio: 638 / 452; /* trims the camera watermark along the bottom edge */
+}
+.place__day img {
+  object-position: 50% 0%;
+}
+.place__night .place__photo {
+  aspect-ratio: 335 / 597;
+  border: 6px solid var(--ivory-dark);
+}
+.place__photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.place__lead {
+  margin-block: 18px 28px;
+  max-width: 44ch;
+  font-size: clamp(1.02rem, 1.7vw, 1.15rem);
+  color: #3d3d3d;
+}
+
+@media (max-width: 860px) {
+  .place__inner {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ---------- Visit section buttons ---------- */
+.contact__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 22px;
+}
+
+@media (max-width: 600px) {
+  .hero__actions .btn {
+    width: 100%;
+  }
+  .contact__actions .btn {
+    width: 100%;
+  }
+}
+
+/* ---------- Reduced motion: keep everything static and visible ---------- */
+@media (prefers-reduced-motion: reduce) {
+  .art__flag {
+    animation: none;
+  }
+  .kitchen__frame img {
+    transform: scale(1.25);
+  }
+}
+
+/* ==========================================================================
+   Dark header with the real logo (white artwork on deep green)
+   ========================================================================== */
+.header {
+  background: var(--green);
+  border-bottom: 1px solid rgba(228, 185, 85, 0.35);
+}
+.header--scrolled {
+  background: rgba(16, 47, 36, 0.96);
+  box-shadow: 0 8px 26px rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(6px);
+}
+.nav__link {
+  color: var(--ivory);
+}
+.nav__link.is-active {
+  color: var(--gold-light);
+}
+.header__toggle {
+  color: var(--ivory);
+  border-color: rgba(247, 240, 227, 0.4);
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-right: auto;
+  text-decoration: none;
+}
+.brand__logo {
+  width: auto;
+  height: 64px;
+  transition: height 0.25s ease;
+}
+.header--scrolled .brand__logo {
+  height: 52px;
+}
+.brand__sub {
+  font-size: 0.62rem;
+  font-weight: 600;
+  letter-spacing: 0.28em;
+  color: var(--gold-light);
+}
+.footer__logo {
+  width: auto;
+  height: 96px;
+  margin-bottom: 6px;
+  margin-left: -4px;
+}
+
+@media (max-width: 960px) {
+  .nav {
+    background: var(--green);
+    border-bottom: 1px solid rgba(228, 185, 85, 0.35);
+  }
+  .nav__link {
+    border-bottom-color: rgba(247, 240, 227, 0.14);
+  }
+  .nav__link.is-active {
+    color: var(--gold-light);
+  }
+}
+@media (max-width: 600px) {
+  .brand__logo {
+    height: 50px;
+  }
+  .header--scrolled .brand__logo {
+    height: 44px;
+  }
+  .brand__sub {
+    display: none;
+  }
+}

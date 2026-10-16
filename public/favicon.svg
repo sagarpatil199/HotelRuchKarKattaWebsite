@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Ruchkar Katta">
+  <rect width="64" height="64" rx="12" fill="#102F24"/>
+  <path d="M20 14v14c0 3 2 5 5 5v17M25 14v14M30 14v14c0 3-2 5-5 5" fill="none" stroke="#E4B955" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M44 14c-5 4-7 10-7 17h7v19" fill="none" stroke="#E4B955" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
